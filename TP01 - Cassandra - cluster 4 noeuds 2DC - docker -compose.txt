@@ -1,0 +1,284 @@
+#################################################################################################################
+## TP01 - Cassandra - cluster 4 noeuds 2DC :
+#################################################################################################################
+
+#################################################################################################################
+## Monter la VM suivante dans Virtual_box : 
+## F:\Formation\Kafka\VMs\Kafka - Ubuntu 20.04 - début TP01 - 2023-06-24.ova
+#################################################################################################################
+
+#################################################################################################################
+## se connecter avec l'utilisateur "user" (mot de passe : user)
+#################################################################################################################
+
+su - user 
+
+## Créer les répertoires : 
+
+sudo rm -Rf ~/cassandra01
+sudo rm -Rf ~/cassandra02
+sudo rm -Rf ~/cassandra03
+sudo rm -Rf ~/cassandra04
+
+sudo rm -Rf ~/cassandra
+sudo mkdir -p ~/cassandra
+sudo chmod 777 -Rf ~/cassandra
+
+## Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
+docker search cassandra
+
+
+## On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
+sudo chmod 777 -R /home/user/
+docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
+
+## on se connecte sur le container nommé cassandra en exécution : 
+docker exec -it cassandra bash
+
+## Et on copie les fichiers de paramètrage de cassandra qui nous servirons plus tard de modèle : 
+cp -r /etc/cassandra /tmp/
+
+## On récupère en local le répertoire /etc/cassandra du container cassandra : 
+## ce répertoire contient la configuration du serveur cassandra qui servira de modèle ensuite.
+
+## On ressort du container : 
+exit
+
+
+## On crée maintenant par recopie les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 
+## (cela nous permettra de les customiser simplement à volonté) :
+
+sudo chmod 777 -Rf ~/cassandra
+ls cassandra 
+
+cp -r ~/cassandra ~/cassandra01
+cp -r ~/cassandra ~/cassandra02
+cp -r ~/cassandra ~/cassandra03
+cp -r ~/cassandra ~/cassandra04
+
+sudo chmod 777 -Rf ~/cassandra01
+sudo chmod 777 -Rf ~/cassandra02
+sudo chmod 777 -Rf ~/cassandra03
+sudo chmod 777 -Rf ~/cassandra04
+
+## Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
+docker ps -a 
+docker stop cassandra
+docker rm cassandra
+docker ps -a 
+
+## Et on supprime notre répertoire modèle :
+sudo rm -Rf ~/cassandra
+
+
+## On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra 
+## à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
+
+## Exemple d'images docker disponibles de cassandra : 
+## docker search cassandra 
+## image: registry.axonops.com/axonops-public/axonops-docker/cassandra:4.1
+## image: cassandra:4.1
+
+
+## créer le fichier docker-compose.yml avec le contenu suivant :   
+vi docker-compose.yml
+
+## Contenu du fichier : 
+
+version: "3.8"
+
+services:
+  cassandra01:
+    image: cassandra:4.1
+    hostname: cassandra01
+    restart: always
+    volumes:
+      - "/home/user/cassandra01:/etc/cassandra:rw" 
+      - "/home/user/cassandra01/data:/var/lib/cassandra:rw" 
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m  
+    ports:
+      - "9042:9042"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  cassandra02:
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    image: cassandra:4.1
+    hostname: cassandra02
+    restart: always
+    volumes:
+      - "/home/user/cassandra02:/etc/cassandra:rw" 
+      - "/home/user/cassandra02/data:/var/lib/cassandra:rw"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9043
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+    ports:
+      - "9043:9043"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  cassandra03:
+    depends_on:
+      cassandra02:
+        condition: service_healthy
+    image: cassandra:4.1
+    hostname: cassandra03
+    restart: always
+    volumes:
+      - "/home/user/cassandra03:/etc/cassandra:rw" 
+      - "/home/user/cassandra03/data:/var/lib/cassandra:rw"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9044
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+    ports:
+      - "9044:9044"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  cassandra04:
+    depends_on:
+      cassandra03:
+        condition: service_healthy
+    image: cassandra:4.1
+    hostname: cassandra04
+    restart: always
+    volumes:
+      - "/home/user/cassandra04:/etc/cassandra:rw" 
+      - "/home/user/cassandra04/data:/var/lib/cassandra:rw"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9045
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+    ports:
+      - "9045:9045"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+## Fin du fichier
+
+
+## On notera au passage  la façon de vérifier que le container est bien lancé : 
+##  méthodes possibles :  
+##     test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+## ou, si "nc" est installé dans l'image docker : 
+##     test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
+
+
+
+## On lance maintenant le cluster : 
+docker-compose up -d
+
+## On contrôle le bon démarrage (plusieurs minutes) : 
+docker ps -a
+
+docker logs user_cassandra01_1 
+
+docker logs user_cassandra01_1  | grep 'jump'
+
+docker exec -it user_cassandra01_1  bash
+
+
+
+#################################################################################################################
+## Une fois le cluster bien démarré, vous aurez : 
+#################################################################################################################
+
+docker logs user_cassandra01_1  | grep 'jump'
+## Affichage : 
+## 	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
+
+docker logs user_cassandra02_1  | grep 'jump'
+
+## Affichage : 
+## 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
+
+docker logs user_cassandra03_1  | grep 'jump'
+## Affichage : 
+## 	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
+
+docker logs user_cassandra04_1  | grep 'jump'
+## Affichage : 
+## INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
+
+
+docker exec -it user_cassandra01_1 nodetool status 
+
+
+#################################################################################################################
+## On vérifie finalement que le cluster est opérationnel également au sens "service cassandra" :
+#################################################################################################################
+docker exec -it user_cassandra01_1 nodetool status 
+
+## Affichage : 
+## 
+	Datacenter: Nord
+	================
+	Status=Up/Down
+	|/ State=Normal/Leaving/Joining/Moving
+	--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+	UN  172.22.0.2  109.41 KiB  16      51.7%             d321d3c4-effb-46c4-abaf-3cb9726dcabd  Winterfell
+	UN  172.22.0.3  109.33 KiB  16      49.2%             71a5ec7f-58c8-474b-8000-5cdb0f4a9886  Winterfell
+
+
+	Datacenter: Terres-de-la-Couronne
+	=================================
+	Status=Up/Down
+	|/ State=Normal/Leaving/Joining/Moving
+	--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+	UN  172.22.0.5  104.36 KiB  16      51.1%             6fed90cf-42f8-4ef8-85db-e1829dcc9940  Port-Real 
+	UN  172.22.0.4  104.37 KiB  16      48.0%             993d2a5e-b6ee-4a67-8dce-223fe8b4413a  Port-Real 
+
+
+
+
+
+#################################################################################################################
+## Fin du lancement du cluster Cassandra 4 noeuds
+#################################################################################################################
