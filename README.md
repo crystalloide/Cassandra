@@ -11,9 +11,11 @@ Notre cluster de démonstration contient 4 noeuds en tout :
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/crystalloide/Cassandra
 )
-## Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
 
-## Affichage du répertoire courant dans Gitpod : 
+### Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
+
+### Affichage du répertoire courant dans Gitpod : 
+
 pwd
 
 /home/gitpod
@@ -25,7 +27,7 @@ git clone https://github.com/crystalloide/cassandra.git
 cd cassandra
 
 
-## Créer les répertoires : 
+### Créer les répertoires : 
 
 sudo rm -Rf /home/gitpod/cassandra/cassandra01
 
@@ -64,38 +66,38 @@ sudo chmod 777 -Rf /home/gitpod/cassandra
 sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
 
-# Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
+### Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
 
 docker search cassandra
 
-# On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
+### On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
 
 docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
 
-# on se connecte sur le container nommé cassandra en exécution : 
+### On se connecte sur le container nommé cassandra en exécution : 
 
 docker exec -it cassandra bash
 
-# Et on copie les fichiers de paramètrage de cassandra qui nous servirons plus tard de modèle : 
+### Et on copie les fichiers de paramètrage de cassandra qui nous serviront plus tard de modèle : 
 
 cp -r /etc/cassandra /tmp/
 
-# On vient de récupérer le répertoire /etc/cassandra du container cassandra : 
+### On vient de récupérer le répertoire /etc/cassandra du container cassandra : 
 
-# Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace)
+### Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace)
 
-# et il contient la configuration du serveur cassandra qui nous servira de modèle ensuite.
+### et il contient la configuration du serveur cassandra qui nous servira de modèle ensuite.
 
-# On ressort du container : 
+### On ressort du container : 
 
 exit
 
 
-# On crée maintenant -par recopie- les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 :
+### On crée maintenant -par recopie- les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 :
 
 ls cassandra
 
-## (cela nous permettra de les customiser simplement à volonté si besoin) :
+### (cela nous permettra de les customiser simplement à volonté si besoin) :
 
 sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
 
