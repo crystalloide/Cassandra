@@ -12,9 +12,9 @@ Notre cluster de démonstration contient 4 noeuds en tout :
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/crystalloide/Cassandra
 )
 
-### Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
+#### Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
 
-### Affichage du répertoire courant dans Gitpod : 
+#### Affichage du répertoire courant dans Gitpod : 
 
 pwd
 
