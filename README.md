@@ -64,34 +64,34 @@ sudo chmod 777 -Rf /home/gitpod/cassandra
 sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
 
-## Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
+# Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
 
 docker search cassandra
 
-## On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
+# On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
 
 docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
 
-## on se connecte sur le container nommé cassandra en exécution : 
+# on se connecte sur le container nommé cassandra en exécution : 
 
 docker exec -it cassandra bash
 
-## Et on copie les fichiers de paramètrage de cassandra qui nous servirons plus tard de modèle : 
+# Et on copie les fichiers de paramètrage de cassandra qui nous servirons plus tard de modèle : 
 
 cp -r /etc/cassandra /tmp/
 
-## On vient de récupérer le répertoire /etc/cassandra du container cassandra : 
+# On vient de récupérer le répertoire /etc/cassandra du container cassandra : 
 
-## Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace)
+# Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace)
 
-## et il contient la configuration du serveur cassandra qui nous servira de modèle ensuite.
+# et il contient la configuration du serveur cassandra qui nous servira de modèle ensuite.
 
-## On ressort du container : 
+# On ressort du container : 
 
 exit
 
 
-## On crée maintenant -par recopie- les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 :
+# On crée maintenant -par recopie- les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 :
 
 ls cassandra
 
@@ -117,7 +117,7 @@ sudo chmod 777 -Rf cassandra03
 
 sudo chmod 777 -Rf cassandra04
 
-## Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
+# Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
 
 docker ps -a 
 
@@ -156,9 +156,10 @@ cat docker-compose.yaml
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-- Vérifier que le composer.yaml fait reéférence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
+- Vérifier que le composer.yaml fait référence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
 
-## On lance maintenant le cluster : 
+
+# On lance maintenant le cluster : 
 
 docker-compose up -d
 
@@ -170,7 +171,7 @@ docker images
 •	Attendez quelques minutes que les conteneurs démarrent
 
 
-## On contrôle le bon démarrage (plusieurs minutes) : 
+# On contrôle le bon démarrage (plusieurs minutes) : 
 
 docker ps -a
 
