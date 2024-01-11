@@ -6,8 +6,8 @@ services:
     hostname: cassandra01
     restart: always
     volumes:
-      - "/home/user/cassandra01:/etc/cassandra:rw" 
-      - "/home/user/cassandra01/data:/var/lib/cassandra:rw" 
+      - "/workspace/Cassandra/cassandra/cassandra01:/etc/cassandra:rw" 
+      - "/workspace/Cassandra/cassandra/cassandra01/data:/var/lib/cassandra:rw" 
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -35,8 +35,8 @@ services:
     hostname: cassandra02
     restart: always
     volumes:
-      - "/home/user/cassandra02:/etc/cassandra:rw" 
-      - "/home/user/cassandra02/data:/var/lib/cassandra:rw"
+      - "/workspace/Cassandra/cassandra/cassandra02:/etc/cassandra:rw"                      
+      - "/workspace/Cassandra/cassandra/cassandra02/data:/var/lib/cassandra:rw"        
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -64,8 +64,8 @@ services:
     hostname: cassandra03
     restart: always
     volumes:
-      - "/home/user/cassandra03:/etc/cassandra:rw" 
-      - "/home/user/cassandra03/data:/var/lib/cassandra:rw"
+      - "/workspace/Cassandra/cassandra/cassandra03:/etc/cassandra:rw"                      
+      - "/workspace/Cassandra/cassandra/cassandra03/data:/var/lib/cassandra:rw"              
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -93,8 +93,8 @@ services:
     hostname: cassandra04
     restart: always
     volumes:
-      - "/home/user/cassandra04:/etc/cassandra:rw" 
-      - "/home/user/cassandra04/data:/var/lib/cassandra:rw"
+      - "/workspace/Cassandra/cassandra/cassandra04:/etc/cassandra:rw"                      
+      - "/workspace/Cassandra/cassandra/cassandra04/data:/var/lib/cassandra:rw"        
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
