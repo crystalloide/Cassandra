@@ -19,19 +19,6 @@ git clone https://github.com/crystalloide/cassandra.git
 
 cd cassandra
 
-•	Démarrer le cluster :
-
-docker compose up -d
-
-•	Pour lister l'image récupérée  :
-
-docker images
-
-•	Attendez quelques minutes que les conteneurs démarrent
-
-
-
-su - user 
 
 ## Créer les répertoires : 
 
@@ -42,7 +29,6 @@ sudo rm -Rf ~/cassandra02
 sudo rm -Rf ~/cassandra03
 
 sudo rm -Rf ~/cassandra04
-
 
 sudo rm -Rf ~/cassandra
 
@@ -142,6 +128,14 @@ sudo rm -Rf ~/cassandra
 
 ## On lance maintenant le cluster : 
 docker-compose up -d
+
+
+• Pour lister l'image récupérée  :
+
+docker images
+
+•	Attendez quelques minutes que les conteneurs démarrent
+
 
 ## On contrôle le bon démarrage (plusieurs minutes) : 
 docker ps -a
