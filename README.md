@@ -1,6 +1,6 @@
 # Cassandra
 
-[# Pour afficher les workspaces déjà instanciés si besoin de faire du ménage :](https://gitpod.io/workspaces)
+
 
 ## Cluster cassandra "formation" dans un environnement virtualisé "Gitpod" :
 
@@ -12,6 +12,7 @@ Notre cluster de démonstration contient 4 noeuds en tout :
 )
 
 #### Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
+[# Pour afficher les workspaces déjà instanciés si besoin de faire du ménage :](https://gitpod.io/workspaces)
 
 #### Affichage du répertoire courant dans Gitpod : 
 
