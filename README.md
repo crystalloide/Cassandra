@@ -134,29 +134,29 @@ sudo rm -Rf cassandra/
 
 - On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
 
-## Exemple d'images docker disponibles de cassandra : 
+- Exemple d'images docker disponibles de cassandra : 
 
-## docker search cassandra 
+docker search cassandra 
 
-## image: registry.axonops.com/axonops-public/axonops-docker/cassandra:4.1
+- Exemple : 
 
-## image: cassandra:4.1
+-> image: cassandra:4.1
 
 
 ## On notera au passage  dans le fichier docker-compose.yml la façon de vérifier que le container est bien lancé : 
 
-## cat docker-compose.yaml 
+cat docker-compose.yaml 
 
-##  méthodes possibles :  
+- méthodes possibles :  
 
-##     test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+     test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
 
-## ou, si "nc" est installé dans l'image docker : 
+      ou, si "nc" est installé dans l'image docker : 
 
-##     test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
+     test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-## Vérifier que le composer.yaml fait reéférence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
+- Vérifier que le composer.yaml fait reéférence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
 
 ## On lance maintenant le cluster : 
 
