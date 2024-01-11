@@ -161,7 +161,7 @@ cat docker-compose.yaml
 - Vérifier que le composer.yaml fait référence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
 
 
-### On lance maintenant le cluster : 
+#### On lance maintenant le cluster : 
 
 docker-compose up -d
 
@@ -173,11 +173,11 @@ docker images
 •	Attendez quelques minutes que les conteneurs démarrent
 
 
-# On contrôle le bon démarrage (plusieurs minutes) : 
+#### On contrôle le bon démarrage (plusieurs minutes) : 
 
 docker ps -a
 
-## Affichage : 
+#### Affichage : 
 
 CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                                                                    NAMES
 
@@ -194,51 +194,51 @@ docker logs cassandra-cassandra01-1
 
 docker logs cassandra-cassandra01-1  | grep 'jump'
 
-# #On se connecte à un des serveurs cassandra : 
+#### On se connecte à un des serveurs cassandra : 
 
 docker exec -it cassandra-cassandra01-1  bash
 
-## On peut lanccer une commande pour voir le statu du cluster : 
+#### On peut lanccer une commande pour voir le statu du cluster : 
 
 nodetool status 
 
-######################
-## Une fois le cluster bien démarré, vous aurez : 
-######################
+
+#### Une fois le cluster bien démarré, vous aurez : 
+
 
 docker logs cassandra-cassandra01-1 | grep 'jump'
 
-## Affichage : 
+#### Affichage : 
 
-## 	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
+####	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra02-1  | grep 'jump'
 
-## Affichage : 
+#### Affichage : 
 
-## 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
+#### 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra03-1  | grep 'jump'
 
-## Affichage : 
+#### Affichage : 
 
-## 	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
+####	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra04-1  | grep 'jump'
 
-## Affichage : 
+#### Affichage : 
 
-## INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
+#### INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
 
 
 docker exec -it cassandra-cassandra01-1 nodetool status 
 
 
-#################################################################################################################
+--------------------------------------------------------------------------------------------------------------
 
-## On vérifie finalement que le cluster est opérationnel également au sens "service cassandra" :
+#### On vérifie finalement que le cluster est opérationnel également au sens "service cassandra" :
 
-# Surveillance d'un cluster Cassandra dans Docker :
+#### Surveillance d'un cluster Cassandra dans Docker :
 
 nodetool est un programme en ligne de commande qui offre un large choix sur la façon d'examiner le cluster, de comprendre son activité et de le modifier.
 
@@ -248,13 +248,13 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
 ## Utilisation de nodetool : On peut utiliser la commande "nodetool status" sur n'importe lequel des nœuds pour voir l'état des nœuds du cluster :
 
-#################################################################################################################
+--------------------------------------------------------------------------------------------------------------
 
 docker exec -it cassandra-cassandra01-1 nodetool status 
 
-## Affichage : 
+#### Affichage : 
 
-## 
+####
 
 Datacenter: Nord
 
@@ -288,15 +288,15 @@ UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c
 
 
 
-#################################################################################################################
+--------------------------------------------------------------------------------------------------------------
 
-## Fin du lancement du cluster Cassandra 4 noeuds
+#### Fin du lancement du cluster Cassandra 4 noeuds
 
-#################################################################################################################
+--------------------------------------------------------------------------------------------------------------
 
 
 
-## Affichage des services en cours d'écoute sur les ports 904* :	
+#### Affichage des services en cours d'écoute sur les ports 904* :	
 
 sudo apt-get install net-tools
 
@@ -319,11 +319,11 @@ tcp6       0      0 [::]:9045               [::]:*                  LISTEN
 tcp6       0      0 [::]:9044               [::]:*                  LISTEN
 
 
-## La commandes "nodetool info" apporte des informations complémentaires :
+#### La commandes "nodetool info" apporte des informations complémentaires :
 
 docker exec -it cassandra-cassandra01-1 nodetool info
 
-### Affichage :
+#### Affichage :
 
 ID                     : f4539d5f-6e29-417a-b2c2-f59d72101120
 
@@ -384,11 +384,11 @@ cat cassandra-rackdc.properties
 
  - Noter les informations sur le rack et le DC auquel le noeud est rattaché
 
-## On ressort du container : 
+#### On ressort du container : 
 
 exit
    
-## Pour voir les détails sur quel noeud possède quelle partie des tokens, on utilise la commande nodetool ring :
+#### Pour voir les détails sur quel noeud possède quelle partie des tokens, on utilise la commande nodetool ring :
 
 docker exec -it cassandra-cassandra01-1 nodetool ring
 
@@ -414,11 +414,11 @@ Address          Rack        Status State   Load            Owns                
   To view status related info of a node use "nodetool status" instead.
 
 
-## Utilisons maintenant le client en ligne de commande "cqlsh" :  
+#### Utilisons maintenant le client en ligne de commande "cqlsh" :  
 
 docker exec -it cassandra-cassandra01-1 cqlsh
 
-### Affichage : 
+#### Affichage : 
 
 Connected to formation at 127.0.0.1:9042
 
@@ -429,7 +429,7 @@ Use HELP for help.
 
 DESCRIBE KEYSPACES;
 
-### Affichage : 
+#### Affichage : 
 
 cqlsh> DESCRIBE KEYSPACES;
 
@@ -439,10 +439,9 @@ system_auth  system_schema       system_views
 
 EXIT;
 
-### Affichage : 
+#### Affichage : 
 
 cqlsh> EXIT
-
 
 
 
