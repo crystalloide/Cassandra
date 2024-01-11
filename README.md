@@ -13,7 +13,8 @@ Notre cluster de démonstration contient 4 noeuds en tout :
 )
 ## Rappel pour retrouver les environnements éventuellement précédemment instanciés dans Gitpod : https://gitpod.io/workspaces
 
-- Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi : 
+- Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi :
+
 git clone https://github.com/crystalloide/cassandra.git
 
 
