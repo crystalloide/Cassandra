@@ -132,9 +132,7 @@ docker ps -a
 sudo rm -Rf cassandra/
 
 
-## On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra 
-
-## à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
+- On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
 
 ## Exemple d'images docker disponibles de cassandra : 
 
