@@ -1,7 +1,7 @@
 # Cassandra
 
 
-## Cluster cassandra "formation" dans un environnement virtualisé "Gitpod" :
+## Cluster Cassandra "formation" dans un environnement virtualisé "Gitpod" :
 
 Notre cluster de démonstration contiendra 4 noeuds en tout : 
 - 2 noeuds sur le Datacenter 1
