@@ -151,7 +151,7 @@ cat docker-compose.yaml
 
      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
 
-      ou, si "nc" est installé dans l'image docker : 
+     ou, si "nc" est installé dans l'image docker : 
 
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
