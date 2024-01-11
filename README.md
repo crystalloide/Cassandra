@@ -209,25 +209,25 @@ docker logs cassandra-cassandra01-1 | grep 'jump'
 
 #### Affichage : 
 
-####	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
+###### 	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra02-1  | grep 'jump'
 
 #### Affichage : 
 
-#### 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
+###### 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra03-1  | grep 'jump'
 
 #### Affichage : 
 
-####	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
+###### 	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
 
 docker logs cassandra-cassandra04-1  | grep 'jump'
 
 #### Affichage : 
 
-#### INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
+###### INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
 
 
 docker exec -it cassandra-cassandra01-1 nodetool status 
@@ -255,34 +255,34 @@ docker exec -it cassandra-cassandra01-1 nodetool status
 
 ####
 
-Datacenter: Nord
+###### Datacenter: Nord
 
-================
+###### ================
 
-Status=Up/Down
+###### Status=Up/Down
 
-|/ State=Normal/Leaving/Joining/Moving
+###### |/ State=Normal/Leaving/Joining/Moving
 
---  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
 
-UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
+###### UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
 
-UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
+###### UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
 
 
-Datacenter: Terres-de-la-Couronne
+###### Datacenter: Terres-de-la-Couronne
 
-=================================
+###### =================================
 
-Status=Up/Down
+###### Status=Up/Down
 
-|/ State=Normal/Leaving/Joining/Moving
+###### |/ State=Normal/Leaving/Joining/Moving
 
---  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
 
-UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
+###### UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
 
-UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
+###### UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
 
 
 
