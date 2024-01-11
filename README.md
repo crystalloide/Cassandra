@@ -157,7 +157,7 @@ cat docker-compose.yaml
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-- Vérifier que le composer.yaml fait référence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
+- Vérifier que notre fichier local "docker-compose.yaml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
 
 
 #### On lance maintenant le cluster : 
