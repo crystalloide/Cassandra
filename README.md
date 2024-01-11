@@ -230,8 +230,6 @@ docker logs cassandra-cassandra04-1  | grep 'jump'
 ###### INFO  [main] 2024-01-11 15:40:00,208 StorageService.java:3084 - Node /172.22.0.5:7000 state jump to NORMAL
 
 
-docker exec -it cassandra-cassandra01-1 nodetool status 
-
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -245,7 +243,7 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
 (ex. : déplacement de données d'un nœud à un autre, la mise hors service de nœuds, la réparation de nœuds, etc.)
 
-## Utilisation de nodetool : On peut utiliser la commande "nodetool status" sur n'importe lequel des nœuds pour voir l'état des nœuds du cluster :
+#### Utilisation de nodetool : On peut utiliser la commande "nodetool status" sur n'importe lequel des nœuds pour voir l'état des nœuds du cluster :
 
 --------------------------------------------------------------------------------------------------------------
 
