@@ -1,5 +1,4 @@
 # Cassandra
-Cassandra
 
 [# Pour afficher les workspaces déjà instanciés si besoin de faire du ménage :](https://gitpod.io/workspaces)
 
