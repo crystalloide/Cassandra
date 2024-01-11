@@ -17,6 +17,7 @@ Notre cluster de démonstration contient 4 noeuds en tout :
 
 git clone https://github.com/crystalloide/cassandra.git
 
+cd cassandra
 
 •	Démarrer le cluster :
 
