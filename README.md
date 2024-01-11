@@ -27,7 +27,7 @@ git clone https://github.com/crystalloide/cassandra.git
 cd cassandra
 
 
-### Créer les répertoires : 
+#### Suppression et création des répertoires utiles : 
 
 sudo rm -Rf /home/gitpod/cassandra/cassandra01
 
