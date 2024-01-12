@@ -112,13 +112,23 @@ cp -r cassandra/ cassandra03/
 
 cp -r cassandra/ cassandra04/
 
-sudo chmod 777 -Rf cassandra01
+sudo mkdir -p cassandra01data
 
-sudo chmod 777 -Rf cassandra02
+sudo mkdir -p cassandra02data
 
-sudo chmod 777 -Rf cassandra03
+sudo mkdir -p cassandra03data
 
-sudo chmod 777 -Rf cassandra04
+sudo mkdir -p cassandra04data
+
+sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
+
+sudo chmod 777 -Rf cassandra01data
+
+sudo chmod 777 -Rf cassandra02data
+
+sudo chmod 777 -Rf cassandra03data
+
+sudo chmod 777 -Rf cassandra04data
 
 #### Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
 
