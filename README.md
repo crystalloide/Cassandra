@@ -71,6 +71,8 @@ docker search cassandra
 
 #### On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
 
+cd cassandra
+
 docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
 
 #### On se connecte sur le container nommé cassandra en exécution : 
