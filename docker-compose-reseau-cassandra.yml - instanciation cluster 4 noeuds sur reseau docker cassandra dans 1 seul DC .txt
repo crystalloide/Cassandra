@@ -1,0 +1,155 @@
+
+su - user
+
+pwd
+
+sudo rm -Rf cassandra* 
+
+vi docker-compose-reseau-cassandra.yml 
+
+
+version: "3.8"
+networks:
+  cassandra:
+services:
+  cassandra01:
+    image: cassandra:4.1
+    container_name: cassandra01
+    hostname: cassandra01
+    mem_limit: 2g
+    restart: always
+    volumes:
+      - "/home/user/cassandra01/data:/var/lib/cassandra:rw"
+      # - "/home/user/cassandra01:/etc/cassandra:rw" 
+      #  - "d:\cassandra01_data:/var/lib/cassandra:rw"       
+    environment: &environnement    # Déclaration des variables d'environnement
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      # - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      # - CASSANDRA_DC=Nord
+      # - CASSANDRA_RACK=Winterfell
+      # - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      # - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m  
+    ports:
+      - "9042:9042"
+    healthcheck:
+      #test: ["CMD", "cqlsh", "-e", "describe keyspaces"]   
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 60s
+    networks:
+      - cassandra
+
+  cassandra02:
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    image: cassandra:4.1
+    container_name: cassandra02
+    hostname: cassandra02
+    mem_limit: 2g
+    restart: always
+    volumes:
+      - "/home/user/cassandra02/data:/var/lib/cassandra:rw"
+      # - "/home/user/cassandra02:/etc/cassandra:rw" 
+      #  - "d:\cassandra01_data:/var/lib/cassandra:rw"       
+    environment: *environnement      # On reprend les variables d'environnement déjà définies précédemment
+      # - CASSANDRA_CLUSTER_NAME=formation
+      # - CASSANDRA_SEEDS=cassandra01,cassandra03
+      # - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      # - CASSANDRA_DC=Nord
+      # - CASSANDRA_RACK=Winterfell
+      # - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      # - CASSANDRA_NATIVE_TRANSPORT_PORT=9043
+      # -  MAX_HEAP_SIZE=256m
+      # - HEAP_NEWSIZE=50m  
+    ports:
+      - "9043:9042"
+    healthcheck:
+      #test: ["CMD", "cqlsh", "-e", "describe keyspaces"]   
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 60s
+    networks:
+      - cassandra
+
+  cassandra03:
+    depends_on:
+      cassandra02:
+        condition: service_healthy
+    image: cassandra:4.1
+    container_name: cassandra03
+    hostname: cassandra03
+    mem_limit: 2g
+    restart: always
+    volumes:
+      - "/home/user/cassandra03/data:/var/lib/cassandra:rw"
+      # - "/home/user/cassandra03:/etc/cassandra:rw" 
+      #  - "d:\cassandra01_data:/var/lib/cassandra:rw"       
+    environment: *environnement      # On reprend les variables d'environnement déjà définies précédemment
+      # - CASSANDRA_CLUSTER_NAME=formation
+      # - CASSANDRA_SEEDS=cassandra01,cassandra03
+      # - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      # - CASSANDRA_DC=Terres-de-la-Couronne
+      # - CASSANDRA_RACK=Port-Real
+      # - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      # - CASSANDRA_NATIVE_TRANSPORT_PORT=9044
+      # - MAX_HEAP_SIZE=256m
+      # - HEAP_NEWSIZE=50m  
+    ports:
+      - "9044:9042"
+    healthcheck:
+      #test: ["CMD", "cqlsh", "-e", "describe keyspaces"]   
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 60s
+    networks:
+      - cassandra
+
+  cassandra04:
+    depends_on:
+      cassandra03:
+        condition: service_healthy
+    image: cassandra:4.1
+    container_name: cassandra04
+    hostname: cassandra04
+    mem_limit: 2g
+    restart: always
+    volumes:
+      - "/home/user/cassandra04/data:/var/lib/cassandra:rw"
+      # - "/home/user/cassandra04:/etc/cassandra:rw" 
+      #  - "d:\cassandra01_data:/var/lib/cassandra:rw"       
+    environment: *environnement      # On reprend les variables d'environnement déjà définies précédemment
+      # - CASSANDRA_CLUSTER_NAME=formation
+      # - CASSANDRA_SEEDS=cassandra01,cassandra03
+      # - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      # - CASSANDRA_DC=Terres-de-la-Couronne
+      # - CASSANDRA_RACK=Port-Real
+      # - CASSANDRA_BROADCAST_RPC_ADDRESS=127.0.0.1
+      # - CASSANDRA_NATIVE_TRANSPORT_PORT=9045
+      # - MAX_HEAP_SIZE=256m
+      # - HEAP_NEWSIZE=50m  
+    ports:
+      - "9045:9042"
+    healthcheck:
+      #test: ["CMD", "cqlsh", "-e", "describe keyspaces"]   
+      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 60s
+    networks:
+      - cassandra
+
+
+## Fin du fichier :
+
+docker compose -f docker-compose-reseau-cassandra.yml up -d
