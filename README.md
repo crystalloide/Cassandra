@@ -31,24 +31,15 @@ et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire
 
 #### Suppression des répertoires avant recréation : 
 
-    sudo rm -Rf /home/gitpod/cassandra/cassandra01
-    sudo rm -Rf /home/gitpod/cassandra/cassandra02
-    sudo rm -Rf /home/gitpod/cassandra/cassandra03
-    sudo rm -Rf /home/gitpod/cassandra/cassandra04
-    sudo rm -Rf /home/gitpod/cassandra/cassandra
-    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra01
-    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra02
-    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra03
-    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra04
-    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra
+    sudo rm -Rf /workspace/Cassandra/cassandra01
+    sudo rm -Rf /workspace/Cassandra/cassandra02
+    sudo rm -Rf /workspace/Cassandra/cassandra03
+    sudo rm -Rf /workspace/Cassandra/cassandra04
+    sudo rm -Rf /workspace/Cassandra/cassandra
 
 #### Création des répertoires utiles : 
 
-    sudo mkdir -p /workspace/Cassandra/cassandra/cassandra
-    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
-    sudo mkdir -p /home/gitpod/cassandra/cassandra
-    sudo chmod 777 -Rf /home/gitpod/cassandra/cassandra
-    sudo chmod 777 -Rf /home/gitpod/cassandra
+    sudo mkdir -p /workspace/Cassandra/cassandra
     sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
 
@@ -85,7 +76,7 @@ et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire
 
     ls cassandra
 
-    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
     ls cassandra 
 
@@ -99,12 +90,9 @@ et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire
     sudo mkdir -p cassandra03data
     sudo mkdir -p cassandra04data
 
-    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
-    sudo chmod 777 -Rf cassandra01data
-    sudo chmod 777 -Rf cassandra02data
-    sudo chmod 777 -Rf cassandra03data
-    sudo chmod 777 -Rf cassandra04data
+
 
 #### Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
 
@@ -121,20 +109,38 @@ et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire
     sudo rm -Rf cassandra/
 
 
-- On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
+#### Regardons les images docker cassandra disponibles en ligne dans docker hub : 
 
 - Exemple d'images docker disponibles de cassandra : 
 
       docker search cassandra 
 
 - Exemple : 
+    
+    NAME                                                        DESCRIPTION                                     STARS     OFFICIAL
+    cassandra                                                   Apache Cassandra is an open-source distribut…   1521      [OK]
+    bitnami/cassandra                                           Bitnami container image for Cassandra           50        
+    bitnami/cassandra-exporter                                                                                  0  
+    ...	
+    ...      
+    litmuschaos/cassandra-client                                                                                0         
+    apache/cassandra-jenkins-k8s                                Cassandra Jenkins K8s                           0         
+    cloudsuite/cassandra                                                                                        0         
+    google/apigee-cassandra-backup-utility                      Apigee cassandra backup utility container im…   0         
+    google/apigee-cassandra-client                              Apigee cassandra client container images        0         
+    google/apigee-cassandra                                     Apigee cassandra container images               0         
+    k8ssandra/medusa                                            Backup and restore services for Apache Cassa…   1         
+    k8ssandra/cass-management-api                               Datastax Management API for Apache Cassandra™   1       
 
--> image: cassandra:4.1
+
+#### On va créer maintenant le fichier docker-compose pour ensuite créer notre cluster cassandra 
+
+#### à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
 
 
-#### On notera au passage  dans le fichier docker-compose.yml la façon de vérifier que le container est bien lancé : 
+#### On notera -au passage-  dans le fichier docker-compose.yml la façon de vérifier que le conteneur cassandra est bien opérationnel : 
 
-    cat docker-compose.yaml 
+    cat docker-compose.yml 
 
 - méthodes possibles :  
 
@@ -145,7 +151,7 @@ et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-- Vérifier que notre fichier local "docker-compose.yaml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra/cassandra01   02    03    04 
+- Vérifier que notre fichier local "docker-compose.yml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra0x/cassandra avec x = 1 2 3 4 
 
 
 #### On lance maintenant le cluster : 
