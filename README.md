@@ -50,8 +50,8 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
       k8ssandra/cass-management-api                               Datastax Management API for Apache Cassandra™   1       
     
 
-#### On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
-    cd cassandra
+#### On lance 1 fois un container nommé ici "cassandra" qui monte le répertoire Gitpod local "/workspace/Cassandra" comme étant le répertoire "/tmp" dans le conteneur : 
+    cd /workspace/Cassandra
 
     docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
 
