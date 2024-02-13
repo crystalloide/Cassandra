@@ -314,14 +314,15 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
     cat cassandra.yaml | grep endpoint_snitch
 
-- Noter :   endpoint_snitch -- Set this to a class that implements
--
-           endpoint_snitch: GossipingPropertyFileSnitch
-    
- - Noter le paramètre adapté au déploiement sur plusieurs Datacenters :   GossipingPropertyFileSnitch
- 
+- Noter :
 
-    cat cassandra-rackdc.properties 
+  endpoint_snitch -- Set this to a class that implements
+
+  endpoint_snitch: GossipingPropertyFileSnitch
+    
+ -> Ce paramètre est adapté au déploiement sur plusieurs Datacenters :   GossipingPropertyFileSnitch
+ 
+       cat cassandra-rackdc.properties 
 
  - Noter les informations sur le rack et le DC auquel le noeud est rattaché
 
