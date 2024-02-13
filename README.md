@@ -176,9 +176,6 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### Affichage des logs d'un conteneur en s'intéressant au message qui confirme un bon démarrage :
     docker logs cassandra-cassandra01-1  | grep 'jump'
-
-#### On se connecte à un des 4 conteneurs cassandra : 
-    docker exec -it cassandra-cassandra01-1  bash
     
 #### Une fois le 1er conteneur du cluster bien démarré, vous aurez : 
 
@@ -186,8 +183,11 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### Affichage : 
      INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
+
+#### On se connecte à un des 4 conteneurs cassandra : 
+    docker exec -it cassandra-cassandra01-1  bash     
     
-#### On peut lancer une commande pour voir le statut du cluster : 
+#### On peut y lancer une commande pour voir le statut du cluster : 
     nodetool status 
 
 #### On sort du conteneur :   
