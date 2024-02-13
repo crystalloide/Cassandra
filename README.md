@@ -79,7 +79,8 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### (cela nous permettra de les customiser simplement à volonté si besoin) :
 
     ls cassandra
-
+    sudo chown gitpod:gitpod -Rf cassandra
+    sudo chown gitpod:gitpod -Rf /workspace/Cassandra/cassandra
     sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
     ls cassandra 
