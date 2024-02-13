@@ -299,10 +299,11 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
     Token                  : (invoke with -T/--tokens to see all 16 tokens)
 
 
-#### On investigue un petit peu sur certains paramètres d'un des noeuds cassandra : 
+#### On lance une session en terminal de commande sur un des noeuds : 
 
     docker exec -it cassandra-cassandra01-1 bash
 
+#### On investigue un petit peu sur certains paramètres d'un des noeuds cassandra :  
     cd /opt/cassandra/conf
 
     ls
