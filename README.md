@@ -20,23 +20,6 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### Affichage :
     /workspace/Cassandra
 
-Remarque : Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi : (pas nécessaire dans notre cas)
- 
-    git clone https://github.com/crystalloide/cassandra.git
-
-et on se positionnerait ensuite dans le répertoire du projet : (pas nécessaire dans notre cas)
-    
-    cd cassandra
-
-
-#### Suppression des répertoires avant recréation : 
-
-    sudo rm -Rf /workspace/Cassandra/cassandra01
-    sudo rm -Rf /workspace/Cassandra/cassandra02
-    sudo rm -Rf /workspace/Cassandra/cassandra03
-    sudo rm -Rf /workspace/Cassandra/cassandra04
-    sudo rm -Rf /workspace/Cassandra/cassandra
-
 #### Création des répertoires utiles : 
 
     sudo mkdir -p /workspace/Cassandra/cassandra
