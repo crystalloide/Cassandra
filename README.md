@@ -125,17 +125,16 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
     sudo rm -Rf cassandra/
 
 
-#### On va créer maintenant le fichier docker-compose pour ensuite créer notre cluster cassandra 
+#### On va regarder le contenu du fichier docker-compose.yml qui va donner les caractéristiques du cluster cassandra qui va être créé avec docker 
 
-#### à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenters :
-
+#### Ce cluster Cassandra est composé de 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenters :
 
 #### On notera -au passage-  dans le fichier docker-compose.yml la façon de vérifier que le conteneur cassandra est bien opérationnel : 
 
     cd /workspace/Cassandra
     cat docker-compose.yml 
 
-- méthodes possibles :  
+- 2 exemples de méthodes possibles ici :  
 
      test: ["CMD-SHELL", "[ $$(nodetool -h 127.0.0.1 -pw cassandra -u cassandra statusgossip) = running ]"]
 
@@ -144,7 +143,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-- Vérifier que notre fichier local "docker-compose.yml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra0x avec x = 1 2 3 4 
+- On pourra vérifier que notre fichier local "docker-compose.yml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra0x avec x = 1 2 3 4 
 
 
 #### On lance maintenant le cluster : 
