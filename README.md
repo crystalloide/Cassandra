@@ -18,7 +18,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
     pwd
     
 #### Affichage :
-    /home/gitpod
+    /workspace/Cassandra
 
 - Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi :
 
