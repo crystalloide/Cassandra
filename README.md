@@ -242,6 +242,7 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
     --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
     UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
     UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
+    
     Datacenter: Terres-de-la-Couronne
     =================================
     Status=Up/Down
