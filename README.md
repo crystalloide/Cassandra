@@ -265,22 +265,14 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
 #### Affichage en retour : 
 
-tcp        0      0 0.0.0.0:9043            0.0.0.0:*               LISTEN     
-
-tcp        0      0 0.0.0.0:9042            0.0.0.0:*               LISTEN     
-
-tcp        0      0 0.0.0.0:9045            0.0.0.0:*               LISTEN     
-
-tcp        0      0 0.0.0.0:9044            0.0.0.0:*               LISTEN    
-
-tcp6       0      0 [::]:9043               [::]:*                  LISTEN     
-
-tcp6       0      0 [::]:9042               [::]:*                  LISTEN     
-
-tcp6       0      0 [::]:9045               [::]:*                  LISTEN  
-
-tcp6       0      0 [::]:9044               [::]:*                  LISTEN
-
+    tcp        0      0 0.0.0.0:9043            0.0.0.0:*               LISTEN     
+    tcp        0      0 0.0.0.0:9042            0.0.0.0:*               LISTEN     
+    tcp        0      0 0.0.0.0:9045            0.0.0.0:*               LISTEN     
+    tcp        0      0 0.0.0.0:9044            0.0.0.0:*               LISTEN    
+    tcp6       0      0 [::]:9043               [::]:*                  LISTEN     
+    tcp6       0      0 [::]:9042               [::]:*                  LISTEN     
+    tcp6       0      0 [::]:9045               [::]:*                  LISTEN  
+    tcp6       0      0 [::]:9044               [::]:*                  LISTEN
 
 #### La commandes "nodetool info" apporte des informations complémentaires :
 
@@ -288,41 +280,26 @@ tcp6       0      0 [::]:9044               [::]:*                  LISTEN
 
 #### Affichage :
 
-ID                     : f4539d5f-6e29-417a-b2c2-f59d72101120
-
-Gossip active          : true
-
-Native Transport active: true
-
-Load                   : 75.19 KiB
-
-Generation No          : 1692971004
-
-Uptime (seconds)       : 702
-
-Heap Memory (MB)       : 87.96 / 251.00
-
-Off Heap Memory (MB)   : 0.00
-
-Data Center            : dc1
-
-Rack                   : rack2
-
-Exceptions             : 0
-
-Key Cache              : entries 11, size 984 bytes, capacity 12 MiB, 104 hits, 122 requests, 0.852 recent hit rate, 14400 save period in seconds
-
-Row Cache              : entries 0, size 0 bytes, capacity 0 bytes, 0 hits, 0 requests, NaN recent hit rate, 0 save period in seconds
-
-Counter Cache          : entries 0, size 0 bytes, capacity 6 MiB, 0 hits, 0 requests, NaN recent hit rate, 7200 save period in seconds
-
-Network Cache          : size 8 MiB, overflow size: 0 bytes, capacity 15 MiB
-
-Percent Repaired       : 100.0%
-
-Token                  : (invoke with -T/--tokens to see all 16 tokens)
+    ID                     : f4539d5f-6e29-417a-b2c2-f59d72101120
+    Gossip active          : true
+    Native Transport active: true
+    Load                   : 75.19 KiB
+    Generation No          : 1692971004
+    Uptime (seconds)       : 702
+    Heap Memory (MB)       : 87.96 / 251.00
+    Off Heap Memory (MB)   : 0.00
+    Data Center            : dc1
+    Rack                   : rack2
+    Exceptions             : 0
+    Key Cache              : entries 11, size 984 bytes, capacity 12 MiB, 104 hits, 122 requests, 0.852 recent hit rate, 14400 save period in seconds
+    Row Cache              : entries 0, size 0 bytes, capacity 0 bytes, 0 hits, 0 requests, NaN recent hit rate, 0 save period in seconds
+    Counter Cache          : entries 0, size 0 bytes, capacity 6 MiB, 0 hits, 0 requests, NaN recent hit rate, 7200 save period in seconds
+    Network Cache          : size 8 MiB, overflow size: 0 bytes, capacity 15 MiB
+    Percent Repaired       : 100.0%
+    Token                  : (invoke with -T/--tokens to see all 16 tokens)
 
 
+#### On investigue un petit peu sur certains paramètres d'un des noeuds cassandra : 
 
     docker exec -it cassandra-cassandra01-1 bash
 
