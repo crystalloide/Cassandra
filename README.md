@@ -144,7 +144,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
      test: ["CMD", "nc", "-z", "127.0.0.1", "9044"]
 
 
-- Vérifier que notre fichier local "docker-compose.yml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra0x/cassandra avec x = 1 2 3 4 
+- Vérifier que notre fichier local "docker-compose.yml" fait bien référence à ces emplacements : /workspace/Cassandra/cassandra0x avec x = 1 2 3 4 
 
 
 #### On lance maintenant le cluster : 
