@@ -26,8 +26,29 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
     sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
 
-### Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
-    docker search cassandra
+#### Regardons les images docker cassandra disponibles en ligne dans docker hub : 
+
+- Exemple d'images docker disponibles de cassandra : 
+
+      docker search cassandra 
+
+- Exemple : 
+    
+    NAME                                                        DESCRIPTION                                     STARS     OFFICIAL
+    cassandra                                                   Apache Cassandra is an open-source distribut…   1521      [OK]
+    bitnami/cassandra                                           Bitnami container image for Cassandra           50        
+    bitnami/cassandra-exporter                                                                                  0  
+    ...	
+    ...      
+    litmuschaos/cassandra-client                                                                                0         
+    apache/cassandra-jenkins-k8s                                Cassandra Jenkins K8s                           0         
+    cloudsuite/cassandra                                                                                        0         
+    google/apigee-cassandra-backup-utility                      Apigee cassandra backup utility container im…   0         
+    google/apigee-cassandra-client                              Apigee cassandra client container images        0         
+    google/apigee-cassandra                                     Apigee cassandra container images               0         
+    k8ssandra/medusa                                            Backup and restore services for Apache Cassa…   1         
+    k8ssandra/cass-management-api                               Datastax Management API for Apache Cassandra™   1       
+    
 
 #### On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
     cd cassandra
@@ -90,30 +111,6 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### Et on supprime notre répertoire modèle :
 
     sudo rm -Rf cassandra/
-
-
-#### Regardons les images docker cassandra disponibles en ligne dans docker hub : 
-
-- Exemple d'images docker disponibles de cassandra : 
-
-      docker search cassandra 
-
-- Exemple : 
-    
-    NAME                                                        DESCRIPTION                                     STARS     OFFICIAL
-    cassandra                                                   Apache Cassandra is an open-source distribut…   1521      [OK]
-    bitnami/cassandra                                           Bitnami container image for Cassandra           50        
-    bitnami/cassandra-exporter                                                                                  0  
-    ...	
-    ...      
-    litmuschaos/cassandra-client                                                                                0         
-    apache/cassandra-jenkins-k8s                                Cassandra Jenkins K8s                           0         
-    cloudsuite/cassandra                                                                                        0         
-    google/apigee-cassandra-backup-utility                      Apigee cassandra backup utility container im…   0         
-    google/apigee-cassandra-client                              Apigee cassandra client container images        0         
-    google/apigee-cassandra                                     Apigee cassandra container images               0         
-    k8ssandra/medusa                                            Backup and restore services for Apache Cassa…   1         
-    k8ssandra/cass-management-api                               Datastax Management API for Apache Cassandra™   1       
 
 
 #### On va créer maintenant le fichier docker-compose pour ensuite créer notre cluster cassandra 
