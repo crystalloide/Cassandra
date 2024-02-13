@@ -179,18 +179,19 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### On se connecte à un des serveurs cassandra : 
     docker exec -it cassandra-cassandra01-1  bash
-
-#### On peut lanccer une commande pour voir le statu du cluster : 
-    nodetool status 
-
-
+    
 #### Une fois le 1er conteneur du cluster bien démarré, vous aurez : 
 
     docker logs cassandra-cassandra01-1 | grep 'jump'
 
 #### Affichage : 
      INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
+    
+#### On peut lanccer une commande pour voir le statut du cluster : 
+    nodetool status 
 
+#### On sort du conteneur :   
+    exit
 
 #### Pour le 2nd conteneur :  
     docker logs cassandra-cassandra02-1  | grep 'jump'
