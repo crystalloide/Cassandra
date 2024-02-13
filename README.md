@@ -127,7 +127,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### On va créer maintenant le fichier docker-compose pour ensuite créer notre cluster cassandra 
 
-#### à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
+#### à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenters :
 
 
 #### On notera -au passage-  dans le fichier docker-compose.yml la façon de vérifier que le conteneur cassandra est bien opérationnel : 
@@ -177,7 +177,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### Affichage des logs d'un conteneur en s'intéressant au message qui confirme un bon démarrage :
     docker logs cassandra-cassandra01-1  | grep 'jump'
 
-#### On se connecte à un des serveurs cassandra : 
+#### On se connecte à un des 4 conteneurs cassandra : 
     docker exec -it cassandra-cassandra01-1  bash
     
 #### Une fois le 1er conteneur du cluster bien démarré, vous aurez : 
@@ -187,7 +187,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### Affichage : 
      INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
     
-#### On peut lanccer une commande pour voir le statut du cluster : 
+#### On peut lancer une commande pour voir le statut du cluster : 
     nodetool status 
 
 #### On sort du conteneur :   
