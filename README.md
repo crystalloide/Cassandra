@@ -15,141 +15,116 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### Affichage du répertoire courant dans Gitpod : 
 
-pwd
-
-/home/gitpod
+    pwd
+    
+#### Affichage :
+    /home/gitpod
 
 - Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi :
 
-git clone https://github.com/crystalloide/cassandra.git
+      git clone https://github.com/crystalloide/cassandra.git
 
-cd cassandra
-
-
-#### Suppression et création des répertoires utiles : 
-
-sudo rm -Rf /home/gitpod/cassandra/cassandra01
-
-sudo rm -Rf /home/gitpod/cassandra/cassandra02
-
-sudo rm -Rf /home/gitpod/cassandra/cassandra03
-
-sudo rm -Rf /home/gitpod/cassandra/cassandra04
-
-sudo rm -Rf /home/gitpod/cassandra/cassandra
+#### On se positionne dans le répertorie du projet :
+    cd cassandra
 
 
+#### Suppression des répertoires avant recréation : 
 
-sudo rm -Rf /workspace/Cassandra/cassandra/cassandra01
+    sudo rm -Rf /home/gitpod/cassandra/cassandra01
+    sudo rm -Rf /home/gitpod/cassandra/cassandra02
+    sudo rm -Rf /home/gitpod/cassandra/cassandra03
+    sudo rm -Rf /home/gitpod/cassandra/cassandra04
+    sudo rm -Rf /home/gitpod/cassandra/cassandra
+    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra01
+    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra02
+    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra03
+    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra04
+    sudo rm -Rf /workspace/Cassandra/cassandra/cassandra
 
-sudo rm -Rf /workspace/Cassandra/cassandra/cassandra02
+#### Création des répertoires utiles : 
 
-sudo rm -Rf /workspace/Cassandra/cassandra/cassandra03
-
-sudo rm -Rf /workspace/Cassandra/cassandra/cassandra04
-
-sudo rm -Rf /workspace/Cassandra/cassandra/cassandra
-
-
-
-sudo mkdir -p /workspace/Cassandra/cassandra/cassandra
-
-sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
-
-sudo mkdir -p /home/gitpod/cassandra/cassandra
-
-sudo chmod 777 -Rf /home/gitpod/cassandra/cassandra
-
-sudo chmod 777 -Rf /home/gitpod/cassandra
-
-sudo chmod 777 -Rf /workspace/Cassandra/cassandra
+    sudo mkdir -p /workspace/Cassandra/cassandra/cassandra
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
+    sudo mkdir -p /home/gitpod/cassandra/cassandra
+    sudo chmod 777 -Rf /home/gitpod/cassandra/cassandra
+    sudo chmod 777 -Rf /home/gitpod/cassandra
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra
 
 
 ### Rappel : si on cherche des images docker disponibles en ligne dans dockerhub : 
-
-docker search cassandra
+    docker search cassandra
 
 #### On lance 1 fois un container nommé ici "cassandra" qui monte un répertoire local ~/tmp dans le conteneur sur /tmp : 
+    cd cassandra
 
-cd cassandra
-
-docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
+    docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
 
 #### On se connecte sur le container nommé cassandra en exécution : 
 
-docker exec -it cassandra bash
+    docker exec -it cassandra bash
 
 #### Et on copie les fichiers de paramètrage de cassandra qui nous serviront plus tard de modèle : 
 
-cp -r /etc/cassandra /tmp/
+    cp -r /etc/cassandra /tmp/
 
 #### On vient de récupérer le répertoire /etc/cassandra du container cassandra : 
 
-#### Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace)
+#### Le répertoire /tmp du container correspond également au répertoire "cassandra" de notre workspace
 
 #### et il contient la configuration du serveur cassandra qui nous servira de modèle ensuite.
 
 #### On ressort du container : 
 
-exit
+    exit
 
 
 #### On crée maintenant -par recopie- les répertoires qui serviront de modèle pour les 4 cassandra01/02/03/04 :
 
-ls cassandra
-
 #### (cela nous permettra de les customiser simplement à volonté si besoin) :
 
-sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
+    ls cassandra
 
-ls cassandra 
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
 
-cp -r cassandra/ cassandra01/
+    ls cassandra 
 
-cp -r cassandra/ cassandra02/
+    cp -r cassandra/ cassandra01/
+    cp -r cassandra/ cassandra02/
+    cp -r cassandra/ cassandra03/
+    cp -r cassandra/ cassandra04/
 
-cp -r cassandra/ cassandra03/
+    sudo mkdir -p cassandra01data
+    sudo mkdir -p cassandra02data
+    sudo mkdir -p cassandra03data
+    sudo mkdir -p cassandra04data
 
-cp -r cassandra/ cassandra04/
+    sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
 
-sudo mkdir -p cassandra01data
-
-sudo mkdir -p cassandra02data
-
-sudo mkdir -p cassandra03data
-
-sudo mkdir -p cassandra04data
-
-sudo chmod 777 -Rf /workspace/Cassandra/cassandra/cassandra
-
-sudo chmod 777 -Rf cassandra01data
-
-sudo chmod 777 -Rf cassandra02data
-
-sudo chmod 777 -Rf cassandra03data
-
-sudo chmod 777 -Rf cassandra04data
+    sudo chmod 777 -Rf cassandra01data
+    sudo chmod 777 -Rf cassandra02data
+    sudo chmod 777 -Rf cassandra03data
+    sudo chmod 777 -Rf cassandra04data
 
 #### Et on supprime notre container qui nous a servi juste à récupérer le modèle de départ :
 
-docker ps -a 
+    docker ps -a 
 
-docker stop cassandra
+    docker stop cassandra
 
-docker rm cassandra
+    docker rm cassandra
 
-docker ps -a 
+    docker ps -a 
 
 #### Et on supprime notre répertoire modèle :
 
-sudo rm -Rf cassandra/
+    sudo rm -Rf cassandra/
 
 
 - On va créer le fichier docker-compose pour ensuite créer notre cluster cassandra à 4 noeuds cassandra01/cassandra02/cassandra03/cassandra04 répartis sur 2 Datacenter :
 
 - Exemple d'images docker disponibles de cassandra : 
 
-docker search cassandra 
+      docker search cassandra 
 
 - Exemple : 
 
@@ -158,7 +133,7 @@ docker search cassandra
 
 #### On notera au passage  dans le fichier docker-compose.yml la façon de vérifier que le container est bien lancé : 
 
-cat docker-compose.yaml 
+    cat docker-compose.yaml 
 
 - méthodes possibles :  
 
@@ -174,68 +149,65 @@ cat docker-compose.yaml
 
 #### On lance maintenant le cluster : 
 
-docker-compose up -d
+    docker-compose up -d
 
 
 • Pour lister l'image récupérée  :
 
-docker images
+    docker images
 
 •	Attendez quelques minutes que les conteneurs démarrent
 
 
 #### On contrôle le bon démarrage (plusieurs minutes) : 
 
-docker ps -a
+    docker ps -a
 
 #### Affichage : 
 
-###### CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                                                                    NAMES
+    ###### CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                                                                    NAMES
+    ###### c23b99e54a65   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 14 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9045->9045/tcp, :::9045->9045/tcp   cassandra-cassandra04-1
+    ###### 2e4b65478df2   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 27 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9044->9044/tcp, :::9044->9044/tcp   cassandra-cassandra03-1
+    ###### b4e6794c7415   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 39 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9043->9043/tcp, :::9043->9043/tcp   cassandra-cassandra02-1
+    ###### 06f21e6a9cba   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 51 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp             cassandra-cassandra01-1
 
-###### c23b99e54a65   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 14 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9045->9045/tcp, :::9045->9045/tcp   cassandra-cassandra04-1
+#### Affichage des logs d'un conteneur : 
+    docker logs cassandra-cassandra01-1 
 
-###### 2e4b65478df2   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 27 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9044->9044/tcp, :::9044->9044/tcp   cassandra-cassandra03-1
-
-###### b4e6794c7415   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 39 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9043->9043/tcp, :::9043->9043/tcp   cassandra-cassandra02-1
-
-###### 06f21e6a9cba   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 51 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp             cassandra-cassandra01-1
-
-
-docker logs cassandra-cassandra01-1 
-
-docker logs cassandra-cassandra01-1  | grep 'jump'
+#### Affichage des logs d'un conteneur en s'intéressant au message qui confirme un bon démarrage :
+    docker logs cassandra-cassandra01-1  | grep 'jump'
 
 #### On se connecte à un des serveurs cassandra : 
-
-docker exec -it cassandra-cassandra01-1  bash
+    docker exec -it cassandra-cassandra01-1  bash
 
 #### On peut lanccer une commande pour voir le statu du cluster : 
-
-nodetool status 
-
-
-#### Une fois le cluster bien démarré, vous aurez : 
+    nodetool status 
 
 
-docker logs cassandra-cassandra01-1 | grep 'jump'
+#### Une fois le 1er conteneur du cluster bien démarré, vous aurez : 
+
+    docker logs cassandra-cassandra01-1 | grep 'jump'
 
 #### Affichage : 
+     INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
 
-###### 	INFO  [main] 2024-01-11 15:39:05,574 StorageService.java:3084 - Node /172.22.0.2:7000 state jump to NORMAL
 
-docker logs cassandra-cassandra02-1  | grep 'jump'
+#### Pour le 2nd conteneur :  
+    docker logs cassandra-cassandra02-1  | grep 'jump'
 
 #### Affichage : 
 
 ###### 	INFO  [main] 2024-01-11 15:39:54,752 StorageService.java:3084 - Node /172.22.0.3:7000 state jump to NORMAL
 
-docker logs cassandra-cassandra03-1  | grep 'jump'
+#### Pour le 3ème conteneur :  
+    docker logs cassandra-cassandra03-1  | grep 'jump'
 
 #### Affichage : 
 
 ###### 	INFO  [main] 2024-01-11 15:39:22,650 StorageService.java:3084 - Node /172.22.0.4:7000 state jump to NORMAL
 
-docker logs cassandra-cassandra04-1  | grep 'jump'
+#### Pour le 4ème conteneur :  
+    docker logs cassandra-cassandra04-1  | grep 'jump'
 
 #### Affichage : 
 
@@ -259,43 +231,23 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
 --------------------------------------------------------------------------------------------------------------
 
-docker exec -it cassandra-cassandra01-1 nodetool status 
+    docker exec -it cassandra-cassandra01-1 nodetool status 
 
 #### Affichage : 
-
-####
-
-###### Datacenter: Nord
-
-###### ================
-
-###### Status=Up/Down
-
-###### |/ State=Normal/Leaving/Joining/Moving
-
-###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
-
-###### UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
-
-###### UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
-
-
-###### Datacenter: Terres-de-la-Couronne
-
-###### =================================
-
-###### Status=Up/Down
-
-###### |/ State=Normal/Leaving/Joining/Moving
-
-###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
-
-###### UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
-
-###### UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
-
-
-
+    ###### Datacenter: Nord
+    ###### ================
+    ###### Status=Up/Down
+    ###### |/ State=Normal/Leaving/Joining/Moving
+    ###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+    ###### UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
+    ###### UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
+    ###### Datacenter: Terres-de-la-Couronne
+    ###### =================================
+    ###### Status=Up/Down
+    ###### |/ State=Normal/Leaving/Joining/Moving
+    ###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+    ###### UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
+    ###### UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -303,13 +255,13 @@ docker exec -it cassandra-cassandra01-1 nodetool status
 
 --------------------------------------------------------------------------------------------------------------
 
-
-
 #### Affichage des services en cours d'écoute sur les ports 904* :	
 
-sudo apt-get install net-tools
+    sudo apt-get install net-tools
 
-netstat -l | grep 904
+    netstat -l | grep 904
+
+#### Affichage en retour : 
 
 tcp        0      0 0.0.0.0:9043            0.0.0.0:*               LISTEN     
 
@@ -330,7 +282,7 @@ tcp6       0      0 [::]:9044               [::]:*                  LISTEN
 
 #### La commandes "nodetool info" apporte des informations complémentaires :
 
-docker exec -it cassandra-cassandra01-1 nodetool info
+    docker exec -it cassandra-cassandra01-1 nodetool info
 
 #### Affichage :
 
@@ -370,36 +322,36 @@ Token                  : (invoke with -T/--tokens to see all 16 tokens)
 
 
 
-docker exec -it cassandra-cassandra01-1 bash
+    docker exec -it cassandra-cassandra01-1 bash
 
-cd /opt/cassandra/conf
+    cd /opt/cassandra/conf
 
-ls
+    ls
 
-cat cassandra-env.sh
+    cat cassandra-env.sh
 
-cat cassandra.yaml
+    cat cassandra.yaml
 
-cat cassandra.yaml | grep endpoint_snitch
+    cat cassandra.yaml | grep endpoint_snitch
 
 - Noter :   endpoint_snitch -- Set this to a class that implements
-  
-            endpoint_snitch: GossipingPropertyFileSnitch
-  
+-
+           endpoint_snitch: GossipingPropertyFileSnitch
+    
  - Noter le paramètre adapté au déploiement sur plusieurs Datacenters :   GossipingPropertyFileSnitch
  
 
-cat cassandra-rackdc.properties 
+    cat cassandra-rackdc.properties 
 
  - Noter les informations sur le rack et le DC auquel le noeud est rattaché
 
 #### On ressort du container : 
 
-exit
+    exit
    
 #### Pour voir les détails sur quel noeud possède quelle partie des tokens, on utilise la commande nodetool ring :
 
-docker exec -it cassandra-cassandra01-1 nodetool ring
+    docker exec -it cassandra-cassandra01-1 nodetool ring
 
 Datacenter: Nord
 
@@ -425,7 +377,7 @@ Address          Rack        Status State   Load            Owns                
 
 #### Utilisons maintenant le client en ligne de commande "cqlsh" :  
 
-docker exec -it cassandra-cassandra01-1 cqlsh
+    docker exec -it cassandra-cassandra01-1 cqlsh
 
 #### Affichage : 
 
@@ -436,7 +388,7 @@ Connected to formation at 127.0.0.1:9042
 Use HELP for help.
 
 
-DESCRIBE KEYSPACES;
+    DESCRIBE KEYSPACES;
 
 #### Affichage : 
 
@@ -446,7 +398,8 @@ system       system_distributed  system_traces  system_virtual_schema
 
 system_auth  system_schema       system_views 
 
-EXIT;
+
+    EXIT;
 
 #### Affichage : 
 
@@ -456,7 +409,7 @@ cqlsh> EXIT
 
 •	Pour arrêter le cluster :
 
-docker-compose down
+    docker-compose down
 
 
 # Have fun!
