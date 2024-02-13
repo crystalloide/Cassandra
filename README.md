@@ -20,11 +20,11 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 #### Affichage :
     /workspace/Cassandra
 
-- Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi :
+Remarque : Si on était dans une VM classique linux : on récupèrerait les fichiers ainsi : (pas nécessaire dans notre cas)
 
       git clone https://github.com/crystalloide/cassandra.git
 
-#### On se positionne dans le répertorie du projet :
+#### On se positionne dans le répertoire du projet :
     cd cassandra
 
 
