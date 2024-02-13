@@ -380,10 +380,9 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
     cqlsh> EXIT
 
 
-
 #### Pour arrêter le cluster :
 
-    docker-compose down
+    docker compose down
 
 
 # Have fun!
