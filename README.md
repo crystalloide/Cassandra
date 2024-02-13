@@ -149,7 +149,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### On lance maintenant le cluster : 
 
-    docker-compose up -d
+    docker compose up -d
 
 
 • Pour lister l'image récupérée  :
