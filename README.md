@@ -165,11 +165,11 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### Affichage : 
 
-    ###### CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                                                                    NAMES
-    ###### c23b99e54a65   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 14 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9045->9045/tcp, :::9045->9045/tcp   cassandra-cassandra04-1
-    ###### 2e4b65478df2   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 27 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9044->9044/tcp, :::9044->9044/tcp   cassandra-cassandra03-1
-    ###### b4e6794c7415   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 39 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9043->9043/tcp, :::9043->9043/tcp   cassandra-cassandra02-1
-    ###### 06f21e6a9cba   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 51 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp             cassandra-cassandra01-1
+    CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                                                                    NAMES
+    c23b99e54a65   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 14 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9045->9045/tcp, :::9045->9045/tcp   cassandra-cassandra04-1
+    2e4b65478df2   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 27 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9044->9044/tcp, :::9044->9044/tcp   cassandra-cassandra03-1
+    b4e6794c7415   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 39 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp, 0.0.0.0:9043->9043/tcp, :::9043->9043/tcp   cassandra-cassandra02-1
+    06f21e6a9cba   cassandra:4.1   "docker-entrypoint.s…"   51 seconds ago   Up 51 seconds (healthy)   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp             cassandra-cassandra01-1
 
 #### Affichage des logs d'un conteneur : 
     docker logs cassandra-cassandra01-1 
@@ -235,20 +235,20 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
     docker exec -it cassandra-cassandra01-1 nodetool status 
 
 #### Affichage : 
-    ###### Datacenter: Nord
-    ###### ================
-    ###### Status=Up/Down
-    ###### |/ State=Normal/Leaving/Joining/Moving
-    ###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
-    ###### UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
-    ###### UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
-    ###### Datacenter: Terres-de-la-Couronne
-    ###### =================================
-    ###### Status=Up/Down
-    ###### |/ State=Normal/Leaving/Joining/Moving
-    ###### --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
-    ###### UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
-    ###### UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
+    Datacenter: Nord
+    ================
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+    UN  172.18.0.3  104.33 KiB  16      50.5%             ea257e07-3ad3-4971-a0d3-eb5d97bfa07c  Winterfell
+    UN  172.18.0.2  109.4 KiB   16      49.2%             4742bcf7-15eb-4229-a6e4-b97ad18201b4  Winterfell
+    Datacenter: Terres-de-la-Couronne
+    =================================
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address     Load        Tokens  Owns (effective)  Host ID                               Rack      
+    UN  172.18.0.4  104.34 KiB  16      50.2%             1d591df1-796e-4f03-8628-935d3fc7cb1f  Port-Real 
+    UN  172.18.0.5  104.35 KiB  16      50.2%             a497f085-ed67-40a0-a3d6-8c9b87b81e64  Port-Real 
 
 --------------------------------------------------------------------------------------------------------------
 
