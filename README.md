@@ -21,11 +21,13 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
     /workspace/Cassandra
 
 #### Création des répertoires utiles : 
-
+    
     sudo mkdir -p /workspace/Cassandra/cassandra
-    sudo chmod 777 -Rf /workspace/Cassandra/cassandra
     sudo chown gitpod:gitpod -Rf /workspace/Cassandra/cassandra
+    
+#### Modification des droits pour pouvir ensuite mapper dans avec le conteneur que l'on lancera : 
 
+    sudo chmod 777 -Rf /workspace/Cassandra/
 
 #### Regardons les images docker cassandra disponibles en ligne dans docker hub : 
 
