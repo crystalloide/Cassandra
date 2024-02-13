@@ -333,26 +333,19 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
     docker exec -it cassandra-cassandra01-1 nodetool ring
 
-Datacenter: Nord
+#### Affichage en retour :  
 
-==========
-
-Address          Rack        Status State   Load            Owns                Token          
-
-172.18.0.3       Winterfell  Up     Normal  104.33 KiB      50.45%              -8981644946389424378  
-
-...
-
-...
-
-172.18.0.5       Port-Real   Up     Normal  104.35 KiB      50.19%              8724035788859790933       
-
-172.18.0.5       Port-Real   Up     Normal  104.35 KiB      50.19%              9150322290140920323                 
-
-
-  Warning: "nodetool ring" is used to output all the tokens of a node.
-  
-  To view status related info of a node use "nodetool status" instead.
+    Datacenter: Nord
+    ==========
+    Address          Rack        Status State   Load            Owns                Token          
+    172.18.0.3       Winterfell  Up     Normal  104.33 KiB      50.45%              -8981644946389424378  
+    ...
+    ...
+    172.18.0.5       Port-Real   Up     Normal  104.35 KiB      50.19%              8724035788859790933       
+    172.18.0.5       Port-Real   Up     Normal  104.35 KiB      50.19%              9150322290140920323                 
+    
+    Warning: "nodetool ring" is used to output all the tokens of a node.
+    To view status related info of a node use "nodetool status" instead.
 
 
 #### Utilisons maintenant le client en ligne de commande "cqlsh" :  
@@ -361,33 +354,33 @@ Address          Rack        Status State   Load            Owns                
 
 #### Affichage : 
 
-Connected to formation at 127.0.0.1:9042
+    Connected to formation at 127.0.0.1:9042
+    [cqlsh 6.1.0 | Cassandra 4.1.3 | CQL spec 3.4.6 | Native protocol v5]
+    Use HELP for help.
 
-[cqlsh 6.1.0 | Cassandra 4.1.3 | CQL spec 3.4.6 | Native protocol v5]
-
-Use HELP for help.
-
+#### Affichage des keyspaces existants dans le cluster cassandra : 
 
     DESCRIBE KEYSPACES;
 
 #### Affichage : 
 
-cqlsh> DESCRIBE KEYSPACES;
+    cqlsh> DESCRIBE KEYSPACES;
 
-system       system_distributed  system_traces  system_virtual_schema
+    system       system_distributed  system_traces  system_virtual_schema
+    system_auth  system_schema       system_views 
 
-system_auth  system_schema       system_views 
 
-
+#### On ressort de la session CQL  : 
+    
     EXIT;
 
 #### Affichage : 
 
-cqlsh> EXIT
+    cqlsh> EXIT
 
 
 
-•	Pour arrêter le cluster :
+#### Pour arrêter le cluster :
 
     docker-compose down
 
