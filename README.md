@@ -120,6 +120,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
 #### On notera -au passage-  dans le fichier docker-compose.yml la façon de vérifier que le conteneur cassandra est bien opérationnel : 
 
+    cd /workspace/Cassandra
     cat docker-compose.yml 
 
 - méthodes possibles :  
