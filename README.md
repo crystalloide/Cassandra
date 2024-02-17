@@ -25,7 +25,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
     sudo mkdir -p /workspace/Cassandra/cassandra
     sudo chown gitpod:gitpod -Rf /workspace/Cassandra/cassandra
     
-#### Modification des droits pour pouvoir ensuite mapper et servir de "sas" entre le conteneur que l'on lancera : 
+#### Modification des droits pour pouvoir ensuite mapper et servir de "sas" avec le conteneur que l'on lancera : 
 
     sudo chmod 777 -Rf /workspace/Cassandra/
 
