@@ -58,7 +58,7 @@ Notre cluster de démonstration contiendra 4 noeuds en tout :
 
     docker run --name cassandra -d --mount src="$(pwd)",target=/tmp,type=bind  cassandra:4.1
     
-#### On vérifier que le conteneur "cassandra" est bien en exécution ( pas statu "exited" : 
+#### On vérifier que le conteneur "cassandra" est bien en exécution (donc pas en statut "exited") : 
 
     docker ps -a 
     
