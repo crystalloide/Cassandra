@@ -256,9 +256,11 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
 --------------------------------------------------------------------------------------------------------------
 
-#### Affichage des services en cours d'écoute sur les ports 904* :	
+#### On installe "netstat" présent dans le package *net-tools* :	
 
     sudo apt-get install net-tools
+
+#### Affichage des services en cours d'écoute sur les ports 904* :	    
 
     netstat -l | grep 904
 
