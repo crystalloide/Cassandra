@@ -327,6 +327,15 @@ nodetool permet d'obtenir des statistiques sur le cluster, de voir les plages de
 
  - Noter les informations sur le rack et le DC auquel le noeud est rattaché
 
+- On regarde l'emplacement du répertoire qui contien les "data" du noeud : /etc/cassandra/data
+
+      ls /etc/cassandra/data 
+
+##### Affichage :
+
+        commitlog  data  hints  saved_caches
+       
+
 #### On ressort du container : 
 
     exit
